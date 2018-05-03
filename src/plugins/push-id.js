@@ -8,6 +8,7 @@ module.exports = function pushIdPlugin(schema) {
       default() {
         return pushId();
       },
+      unique: true,
       validate: {
         validator(v) {
           return /^[a-z0-9-_]{20}$/i.test(v);
