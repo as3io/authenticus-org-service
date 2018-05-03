@@ -2,6 +2,7 @@ const { Schema } = require('mongoose');
 const bcrypt = require('bcrypt');
 const validator = require('validator');
 const crypto = require('crypto');
+const softDeleteablePlugin = require('../plugins/soft-deleteable');
 
 const schema = new Schema({
   email: {
@@ -56,11 +57,16 @@ const schema = new Schema({
   timestamps: true,
 });
 
+schema.plugin(softDeleteablePlugin);
+
 /**
  * Indexes
  */
 schema.index({ email: 1, isEmailVerified: 1 });
-schema.index({ email: 1, orgId: 1 }, { unique: true });
+schema.index({ email: 1 }, {
+  unique: true,
+  partialFilterExpression: { deleted: false },
+});
 
 /**
  * Hooks.
