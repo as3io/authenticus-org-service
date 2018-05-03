@@ -1,0 +1,9 @@
+type Application {
+  id: String!
+  pushId: String!
+  name: String!
+  slug: String!
+  description: String
+  createdAt: Date
+  updatedAt: Date
+}

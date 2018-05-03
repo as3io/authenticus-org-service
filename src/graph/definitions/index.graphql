@@ -1,3 +1,5 @@
+# import * from 'application.graphql'
+
 scalar Date
 scalar Cursor
 
