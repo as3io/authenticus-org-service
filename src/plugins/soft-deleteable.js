@@ -1,4 +1,4 @@
-module.exports = function softDeleteable(schema) {
+module.exports = function softDeleteablePlugin(schema) {
   schema.add({
     deleted: {
       type: Boolean,
