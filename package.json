@@ -1,0 +1,26 @@
+{
+  "name": "authenticus-server",
+  "version": "0.1.0",
+  "main": "src/index.js",
+  "author": "Jacob Bare <jacob@limit0.io>",
+  "license": "MIT",
+  "scripts": {
+    "prestart": "$npm_package_docker_dev_install",
+    "start": "$npm_package_docker_dev_up",
+    "stop": "$npm_package_docker_dev_down",
+    "terminal": "docker exec -it authenticusserver_app_1 /bin/bash"
+  },
+  "docker": {
+    "dev": {
+      "install": "docker-compose -p authenticus-server run --no-deps --entrypoint yarn app",
+      "up": "docker-compose -p authenticus-server up",
+      "down": "docker-compose -p authenticus-server down"
+    }
+  },
+  "devDependencies": {
+    "eslint": "^4.19.1",
+    "eslint-config-airbnb-base": "^12.1.0",
+    "eslint-plugin-import": "^2.11.0",
+    "gulp": "^3.9.1"
+  }
+}
