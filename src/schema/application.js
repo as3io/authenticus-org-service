@@ -7,15 +7,10 @@ const schema = new Schema({
     required: true,
     trim: true,
   },
-  orgId: {
-    type: Schema.Types.ObjectId,
-    required: true,
-    ref: 'organization',
-  },
+}, {
+  timestamps: true,
 });
 
 schema.plugin(pushIdPlugin);
-
-schema.index({ orgId: 1 });
 
 module.exports = schema;

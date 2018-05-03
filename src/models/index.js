@@ -1,7 +1,9 @@
 const Application = require('./application');
-const Organization = require('./organization');
+const ApplicationUser = require('./application-user');
+const User = require('./user');
 
 module.exports = {
   Application,
-  Organization,
+  ApplicationUser,
+  User,
 };
