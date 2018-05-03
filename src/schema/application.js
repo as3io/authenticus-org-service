@@ -1,5 +1,6 @@
 const { Schema } = require('mongoose');
 const pushIdPlugin = require('../plugins/push-id');
+const sluggablePlugin = require('../plugins/sluggable');
 
 const schema = new Schema({
   name: {
@@ -11,6 +12,7 @@ const schema = new Schema({
   timestamps: true,
 });
 
+schema.plugin(sluggablePlugin, { softDeleteable: true, createFrom: 'name' });
 schema.plugin(pushIdPlugin);
 
 module.exports = schema;
