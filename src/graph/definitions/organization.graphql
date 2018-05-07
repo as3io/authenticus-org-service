@@ -1,3 +1,7 @@
+type Mutation {
+  createOrganization(input: CreateOrganizationInput!): Organization!
+}
+
 type Organization {
   id: String!
   name: String!
@@ -5,4 +9,13 @@ type Organization {
   description: String
   createdAt: Date
   updatedAt: Date
+}
+
+input CreateOrganizationInput {
+  payload: OrganizationPayloadInput!
+}
+
+input OrganizationPayloadInput {
+  name: String!
+  description: String
 }
