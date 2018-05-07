@@ -12,7 +12,7 @@ module.exports = function sluggablePlugin(schema, options) {
     },
   });
 
-  schema.pre('save', function setSlug(done) {
+  schema.pre('validate', function setSlug(done) {
     if (!options || !options.createFrom) throw new Error('You must specify which field to create the slug from.');
     const { createFrom } = options;
     const decoded = entities.decode(decodeURIComponent(this[createFrom]));
