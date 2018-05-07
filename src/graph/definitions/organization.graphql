@@ -1,6 +1,5 @@
-type Application {
+type Organization {
   id: String!
-  pushId: String!
   name: String!
   slug: String!
   description: String

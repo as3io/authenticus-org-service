@@ -1,4 +1,4 @@
-# import * from 'application.graphql'
+# import * from 'organization.graphql'
 
 scalar Date
 scalar Cursor
