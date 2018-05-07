@@ -8,8 +8,8 @@ const connection = mongoose.createConnection(MONGO_DSN, {
   // autoIndex: process.env.NODE_ENV !== 'production',
   ignoreUndefined: true,
   promiseLibrary: bluebird,
-}).then(() => {
-  process.stdout.write(`Successful MongoDB connection to '${MONGO_DSN}'\n`);
 });
+
+connection.once('open', () => process.stdout.write(`Successful MongoDB connection to '${MONGO_DSN}'\n`));
 
 module.exports = connection;
