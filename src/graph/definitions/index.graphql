@@ -1,4 +1,5 @@
 # import * from 'organization.graphql'
+# import * from 'user.graphql'
 # import * from 'org/application.graphql'
 
 scalar Date

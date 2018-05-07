@@ -1,0 +1,27 @@
+type Mutation {
+  createUser(input: CreateUserInput!): User
+}
+
+type User {
+  id: String!
+  email: String!
+  givenName: String
+  familyName: String
+  logins: Int
+  lastLoggedInAt: Date
+  photoURL: String
+  createdAt: Date
+  updatedAt: Date
+}
+
+input CreateUserInput {
+  # captcha: String
+  payload: NewUserPayloadInput
+}
+
+input NewUserPayloadInput {
+  email: String!
+  password: String!
+  givenName: String!
+  familyName: String!
+}
