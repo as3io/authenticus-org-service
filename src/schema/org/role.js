@@ -1,6 +1,7 @@
 const { Schema } = require('mongoose');
-const sluggablePlugin = require('../plugins/sluggable');
-const Application = require('../models/application');
+const sluggablePlugin = require('../../plugins/sluggable');
+const pushIdPlugin = require('../../plugins/push-id');
+const OrgApplication = require('../../models/org/application');
 
 const schema = new Schema({
   name: {
@@ -13,11 +14,11 @@ const schema = new Schema({
     trim: true,
   },
   appId: {
-    type: Schema.Types.ObjectId,
+    type: String,
     required: true,
     validate: {
       async validator(v) {
-        const doc = await Application.findOne({ _id: v }, { _id: 1 });
+        const doc = await OrgApplication.findOne({ _id: v }, { _id: 1 });
         if (doc) return true;
         return false;
       },
@@ -28,6 +29,7 @@ const schema = new Schema({
   timestamps: true,
 });
 
+schema.plugin(pushIdPlugin);
 schema.plugin(sluggablePlugin, { createFrom: 'name' });
 
 schema.index({ appId: 1, slug: 1 }, { unique: true });

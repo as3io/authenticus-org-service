@@ -1,11 +1,13 @@
-const Application = require('./application');
-const ApplicationUser = require('./application-user');
-const Role = require('./role');
-const User = require('./user');
+const Organization = require('./organization');
+const OrgApplication = require('./org/application');
+const OrgApplicationUser = require('./org/application-user');
+const OrgRole = require('./org/role');
+const OrgUser = require('./org/user');
 
 module.exports = {
-  Application,
-  ApplicationUser,
-  Role,
-  User,
+  Organization,
+  OrgApplication,
+  OrgApplicationUser,
+  OrgRole,
+  OrgUser,
 };

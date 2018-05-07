@@ -1,15 +1,16 @@
 const { Schema } = require('mongoose');
-const Application = require('../models/application');
-const User = require('../models/user');
-const Role = require('../models/role');
+const OrgApplication = require('../../models/org/application');
+const OrgUser = require('../../models/org/user');
+const OrgRole = require('../../models/org/role');
+const pushIdPlugin = require('../../plugins/push-id');
 
 const schema = new Schema({
   userId: {
-    type: Schema.Types.ObjectId,
+    type: String,
     required: true,
     validate: {
       async validator(v) {
-        const doc = await User.findOne({ _id: v }, { _id: 1 });
+        const doc = await OrgUser.findOne({ _id: v }, { _id: 1 });
         if (doc) return true;
         return false;
       },
@@ -17,11 +18,11 @@ const schema = new Schema({
     },
   },
   appId: {
-    type: Schema.Types.ObjectId,
+    type: String,
     required: true,
     validate: {
       async validator(v) {
-        const doc = await Application.findOne({ _id: v }, { _id: 1 });
+        const doc = await OrgApplication.findOne({ _id: v }, { _id: 1 });
         if (doc) return true;
         return false;
       },
@@ -29,11 +30,11 @@ const schema = new Schema({
     },
   },
   roleId: {
-    type: Schema.Types.ObjectId,
+    type: String,
     required: true,
     validate: {
       async validator(v) {
-        const doc = await Role.findOne({ _id: v }, { _id: 1, appId: 1 });
+        const doc = await OrgRole.findOne({ _id: v }, { _id: 1, appId: 1 });
         if (!doc) return false;
         return this.appId.toString() === doc.appId.toString();
       },
@@ -51,6 +52,8 @@ const schema = new Schema({
 }, {
   timestamps: true,
 });
+
+schema.plugin(pushIdPlugin);
 
 schema.index({ appId: 1, userId: 1 }, { unique: true });
 
