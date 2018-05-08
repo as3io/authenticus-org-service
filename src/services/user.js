@@ -12,6 +12,31 @@ const sessionRepo = new Session({
 
 const UserService = () => Object.create({
   /**
+   * Creates a new user.
+   *
+   * @async
+   * @param {object} payload The new user payload.
+   * @param {string} payload.email The user's email address.
+   * @param {string} payload.password The password.
+   * @param {string} payload.givenName The user's first (family) name.
+   * @param {string} payload.familyName The user's last (given) name.
+   */
+  create({
+    email,
+    password,
+    givenName,
+    familyName,
+  } = {}) {
+    const doc = new UserModel({
+      email,
+      password,
+      givenName,
+      familyName,
+    });
+    return doc.save();
+  },
+
+  /**
    * Finds a user by the provided email address.
    *
    * @async
