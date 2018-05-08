@@ -99,6 +99,21 @@ const UserService = () => Object.create({
   },
 
   /**
+   * Retrieves a user session for the provided JWT token.
+   *
+   * @async
+   * @param {string} token The JWT.
+   */
+  async retrieveSession(token) {
+    const session = await sessionRepo.get(token);
+    // Ensure user still exists/refresh the user data.
+    const user = await this.findById(session.uid);
+    if (!user) throw new Error('Unable to retrieve session: the provided user could not be found.');
+    // @todo Ensure password has not changed somehow.
+    return { user, session };
+  },
+
+  /**
    * Updates the user login info.
    *
    * @async
