@@ -78,7 +78,7 @@ const UserService = () => Object.create({
     await this.verifyPassword(password, user.password);
 
     // Create session.
-    const session = await sessionRepo.set({ uid: user.id });
+    const session = await sessionRepo.set(user.id);
 
     // Update login info
     await this.updateLoginInfo(user);
