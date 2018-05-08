@@ -1,4 +1,4 @@
-const User = require('../../models/user');
+const UserService = require('../../services/user');
 
 module.exports = {
   /**
@@ -10,8 +10,15 @@ module.exports = {
      */
     createUser: (root, { input }) => {
       const { payload } = input;
-      const doc = new User(payload);
-      return doc.save();
+      return UserService.create(payload);
+    },
+
+    /**
+     *
+     */
+    loginUser: (root, { input }) => {
+      const { email, password } = input;
+      return UserService.login(email, password);
     },
   },
 };
