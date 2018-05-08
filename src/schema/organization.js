@@ -14,6 +14,11 @@ const userSettingsSchema = new Schema({
       return parseInt(v, 10);
     },
   },
+  requireEmailConfirmation: {
+    type: Boolean,
+    required: true,
+    default: false,
+  },
 });
 
 const settingsSchema = new Schema({
