@@ -104,11 +104,12 @@ class Session {
   }
 
   /**
-   * @param {object} params
-   * @param {string} params.id The session ID.
-   * @param {string} params.uid The user ID.
+   * @async
+   * @param {string} id The session ID.
+   * @param {string} uid The user ID.
    */
-  delete({ id, uid }) {
+  async delete(id, uid) {
+    if (!id || !uid) throw new Error('Unable to delete session: both a session and user ID are required.');
     const delSession = redis.delAsync(this.prefixSessionId(id));
     const removeId = redis.sremAsync(this.prefixUserId(uid), id);
     return Promise.join(delSession, removeId);

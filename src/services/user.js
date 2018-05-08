@@ -116,6 +116,17 @@ const UserService = () => Object.create({
   },
 
   /**
+   * Deletes a user session.
+   *
+   * @async
+   * @param {string} id The session ID.
+   * @param {string} uid The user ID.
+   */
+  deleteSession(id, uid) {
+    return sessionRepo.delete(id, uid);
+  },
+
+  /**
    * Updates the user login info.
    *
    * @async

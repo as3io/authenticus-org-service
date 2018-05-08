@@ -34,5 +34,15 @@ module.exports = {
       const { email, password } = input;
       return UserService.login(email, password);
     },
+
+    /**
+     *
+     */
+    deleteSession: async (root, args, { auth }) => {
+      auth.check();
+      const { id, uid } = auth.session;
+      await UserService.deleteSession(id, uid);
+      return 'ok';
+    },
   },
 };

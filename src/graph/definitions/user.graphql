@@ -5,6 +5,7 @@ type Query {
 type Mutation {
   createUser(input: CreateUserInput!): User!
   loginUser(input: LoginInput!): Authentication!
+  deleteSession: String
 }
 
 type Authentication {
