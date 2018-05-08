@@ -16,8 +16,10 @@ module.exports = {
     /**
      *
      */
-    createOrganization: (root, { input }) => {
+    createOrganization: (root, { input }, { auth }) => {
+      auth.check();
       const { payload } = input;
+      payload.owningUserId = auth.user.id;
       const doc = new Organization(payload);
       return doc.save();
     },
