@@ -63,7 +63,7 @@ const schema = new Schema({
 schema.plugin(pushIdPlugin);
 schema.plugin(sluggablePlugin, { createFrom: 'name' });
 
-schema.index({ slug: 1 }, { unique: true });
+schema.index({ owningUserId: 1, slug: 1 }, { unique: true });
 schema.index({ name: 1, _id: 1 }, { unique: true });
 schema.index({ name: -1, _id: -1 }, { unique: true });
 schema.index({ updatedAt: 1, _id: 1 }, { unique: true });
