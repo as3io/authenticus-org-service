@@ -10,6 +10,9 @@ const sessionRepo = new Session({
   expires: ROOT_SESSION_EXPIRES,
 });
 
+/**
+ * @todo Ensure all user sessions are invalidated on password change.
+ */
 const UserService = () => Object.create({
   /**
    * Creates a new user.
@@ -109,7 +112,6 @@ const UserService = () => Object.create({
     // Ensure user still exists/refresh the user data.
     const user = await this.findById(session.uid);
     if (!user) throw new Error('Unable to retrieve session: the provided user could not be found.');
-    // @todo Ensure password has not changed somehow.
     return { user, session };
   },
 
