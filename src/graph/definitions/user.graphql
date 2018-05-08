@@ -1,5 +1,15 @@
+type Query {
+  checkSession(input: SessionTokenInput!): Authentication!
+}
+
 type Mutation {
-  createUser(input: CreateUserInput!): User
+  createUser(input: CreateUserInput!): User!
+  loginUser(input: LoginInput!): Authentication!
+}
+
+type Authentication {
+  user: User!
+  session: Session!
 }
 
 type User {
@@ -14,6 +24,14 @@ type User {
   updatedAt: Date
 }
 
+type Session {
+  id: String!
+  uid: String!
+  cre: Int!
+  exp: Int!
+  token: String!
+}
+
 input CreateUserInput {
   # captcha: String
   payload: NewUserPayloadInput
@@ -24,4 +42,13 @@ input NewUserPayloadInput {
   password: String!
   givenName: String!
   familyName: String!
+}
+
+input SessionTokenInput {
+  token: String!
+}
+
+input LoginInput {
+  email: String!
+  password: String!
 }
