@@ -8,3 +8,17 @@ scalar Cursor
 type Query {
   ping: String!
 }
+
+type PageInfo {
+  hasNextPage: Boolean!
+  endCursor: Cursor
+}
+
+input ModelIdInput {
+  id: String!
+}
+
+input PaginationInput {
+  first: Int! = 25
+  after: Cursor
+}
