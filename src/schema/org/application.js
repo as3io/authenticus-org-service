@@ -4,19 +4,6 @@ const pushIdPlugin = require('../../plugins/push-id');
 const sluggablePlugin = require('../../plugins/sluggable');
 const orgRelatablePlugin = require('../../plugins/org-relatable');
 
-const userSettingsSchema = new Schema({
-  pwdSaltRounds: {
-    type: Number,
-    required: true,
-    min: 8,
-    max: 15,
-    default: 10,
-    set(v) {
-      return parseInt(v, 10);
-    },
-  },
-});
-
 const sessionSettingsSchema = new Schema({
   namespace: {
     type: String,
@@ -46,11 +33,6 @@ const sessionSettingsSchema = new Schema({
 const settingsSchema = new Schema({
   session: {
     type: sessionSettingsSchema,
-    required: true,
-    default: {},
-  },
-  user: {
-    type: userSettingsSchema,
     required: true,
     default: {},
   },

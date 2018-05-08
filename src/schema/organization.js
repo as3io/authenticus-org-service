@@ -3,6 +3,27 @@ const User = require('../models/user');
 const pushIdPlugin = require('../plugins/push-id');
 const sluggablePlugin = require('../plugins/sluggable');
 
+const userSettingsSchema = new Schema({
+  pwdSaltRounds: {
+    type: Number,
+    required: true,
+    min: 8,
+    max: 15,
+    default: 10,
+    set(v) {
+      return parseInt(v, 10);
+    },
+  },
+});
+
+const settingsSchema = new Schema({
+  user: {
+    type: userSettingsSchema,
+    required: true,
+    default: {},
+  },
+});
+
 const schema = new Schema({
   name: {
     type: String,
@@ -24,6 +45,11 @@ const schema = new Schema({
       },
       message: 'No user found for ID {VALUE}',
     },
+  },
+  settings: {
+    type: settingsSchema,
+    required: true,
+    default: {},
   },
 }, {
   timestamps: true,
