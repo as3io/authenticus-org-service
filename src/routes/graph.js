@@ -7,7 +7,13 @@ const OrganizationContext = require('../context/organization');
 
 const router = Router();
 
+router.use('/:orgId([A-Za-z0-9-_]{20})', noCache(), bodyParser.json(), (req, res) => {
+  const { orgId } = req.params;
+  res.send({ orgId });
+});
+
 router.use(
+  '/',
   noCache(),
   bodyParser.json(),
   graphqlExpress((req) => {
