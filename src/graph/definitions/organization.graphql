@@ -1,3 +1,8 @@
+type Query {
+  allOrganizations(pagination: PaginationInput = {}, sort: OrganizationSortInput = {}): OrganizationConnection!
+  organization(input: ModelIdInput!): Organization!
+}
+
 type Mutation {
   createOrganization(input: CreateOrganizationInput!): Organization!
 }
@@ -12,6 +17,22 @@ type Organization {
   updatedAt: Date
 }
 
+type OrganizationConnection {
+  totalCount: Int!
+  edges: [OrganizationEdge]!
+  pageInfo: PageInfo!
+}
+
+type OrganizationEdge {
+  node: Organization!
+  cursor: Cursor!
+}
+
+input OrganizationSortInput {
+  field: OrganizationSortField! = createdAt
+  order: Int! = -1
+}
+
 input CreateOrganizationInput {
   payload: OrganizationPayloadInput!
 }
@@ -19,4 +40,10 @@ input CreateOrganizationInput {
 input OrganizationPayloadInput {
   name: String!
   description: String
+}
+
+enum OrganizationSortField {
+  name
+  createdAt
+  updatedAt
 }
