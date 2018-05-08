@@ -13,7 +13,7 @@ const sessionRepo = new Session({
 /**
  * @todo Ensure all user sessions are invalidated on password change.
  */
-const UserService = () => Object.create({
+const UserService = () => Object.freeze({
   /**
    * Creates a new user.
    *
