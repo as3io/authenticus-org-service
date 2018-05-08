@@ -1,4 +1,5 @@
 const jwt = require('jsonwebtoken');
+const Promise = require('bluebird');
 const uuidv4 = require('uuid/v4');
 const uuidv5 = require('uuid/v5');
 const bcrypt = require('bcrypt');
@@ -19,7 +20,7 @@ class Session {
     expires = 3600,
   } = {}) {
     this.appId = appId || undefined;
-    this.expires = expires;
+    this.expires = parseInt(expires, 10);
 
     if (!namespace || !secret) throw new Error('Both a session namespace and secret must be provided.');
     this.namespace = namespace;
