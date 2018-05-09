@@ -63,6 +63,16 @@ const UserService = () => Object.freeze({
   },
 
   /**
+   * Finds a user by the provided criteria.
+   *
+   * @param {object} criteria
+   * @param {?object} fields
+   */
+  findOne(criteria, fields) {
+    return UserModel.findOne(criteria, fields);
+  },
+
+  /**
    * Logs a user in for the provided email and password.
    *
    * @async
