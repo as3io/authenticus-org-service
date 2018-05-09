@@ -6,6 +6,8 @@ type Mutation {
   createUser(input: CreateUserInput!): User!
   loginUser(input: LoginInput!): Authentication!
   deleteSession: String
+  changeUserPassword(input: ChangeUserPasswordInput!): User
+  updateCurrentUserProfile(input: CurrentUserProfileInput!): User
 }
 
 type Authentication {
@@ -52,4 +54,15 @@ input SessionTokenInput {
 input LoginInput {
   email: String!
   password: String!
+}
+
+input ChangeUserPasswordInput {
+  id: String!
+  value: String!
+  confirm: String!
+}
+
+input CurrentUserProfileInput {
+  givenName: String!
+  familyName: String!
 }
