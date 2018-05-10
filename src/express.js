@@ -1,17 +1,15 @@
 const express = require('express');
 const helmet = require('helmet');
-const passport = require('passport');
-const authStrategies = require('./auth-strategies');
-const loadRoutes = require('./routes');
 
-passport.use('core-bearer', authStrategies.bearer);
+const coreRouter = require('./core/router');
+const tenantRouter = require('./tenant/router');
 
 const app = express();
 
-app.use(passport.initialize());
 app.use(helmet());
 app.use(express.static('public'));
 
-loadRoutes(app);
+app.use('/api/:orgId([A-Za-z0-9-_]{20})', tenantRouter);
+app.use('/api', coreRouter);
 
 module.exports = app;

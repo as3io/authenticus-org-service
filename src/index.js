@@ -5,8 +5,10 @@ const mongoose = require('./mongoose');
 const redis = require('./redis');
 const errors = require('./errors');
 
-const { HTTP_PORT } = process.env;
+const { coreConnection, tenantConnection } = mongoose;
+const { coreClient, tenantClient } = redis;
 
+const { HTTP_PORT } = process.env;
 const httpServer = app.listen(HTTP_PORT, () => {
   process.stdout.write(`HTTP server for '${pkg.name}' listening on port ${HTTP_PORT}\n`);
 });
@@ -14,7 +16,13 @@ const httpServer = app.listen(HTTP_PORT, () => {
 // Shutdown app gracefully.
 function handleExit(options, err) {
   if (options.cleanup) {
-    const actions = [httpServer.close, mongoose.disconnect, redis.quit];
+    const actions = [
+      httpServer.close,
+      coreConnection.disconnect,
+      tenantConnection.disconnect,
+      coreClient.quit,
+      tenantClient.quit,
+    ];
     actions.forEach((close, i) => {
       try {
         close(() => {
