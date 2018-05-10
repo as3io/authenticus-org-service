@@ -1,7 +1,7 @@
 const { Schema } = require('mongoose');
-const sluggablePlugin = require('../../common/plugins/sluggable');
 const pushIdPlugin = require('../../common/plugins/push-id');
-const Application = require('../models/application');
+const sluggablePlugin = require('../../common/plugins/sluggable');
+const ApplicationTenant = require('../models/application-tenant');
 
 const schema = new Schema({
   name: {
@@ -13,25 +13,17 @@ const schema = new Schema({
     type: String,
     trim: true,
   },
-  appId: {
+  appTenantId: {
     type: String,
     required: true,
     validate: {
       async validator(v) {
-        const doc = await Application.findOne({ _id: v }, { _id: 1 });
+        const doc = await ApplicationTenant.findOne({ _id: v }, { _id: 1 });
         if (doc) return true;
         return false;
       },
-      message: 'No application found for ID {VALUE}',
+      message: 'No application tenant found for ID {VALUE}',
     },
-  },
-  defaultGrant: {
-    type: Boolean,
-    required: true,
-    default: false,
-  },
-  permissions: {
-    type: [Schema.Types.ObjectId],
   },
 }, {
   timestamps: true,
@@ -41,5 +33,3 @@ schema.plugin(pushIdPlugin);
 schema.plugin(sluggablePlugin, { createFrom: 'name' });
 
 schema.index({ appId: 1, slug: 1 }, { unique: true });
-
-module.exports = schema;
