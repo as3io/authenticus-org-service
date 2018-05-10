@@ -2,12 +2,12 @@ const express = require('express');
 const helmet = require('helmet');
 const passport = require('passport');
 
-const coreBearer = require('./core/auth-strategies/bearer');
+const bearer = require('./common/auth-strategies/bearer');
 
 const coreRouter = require('./core/router');
 const tenantRouter = require('./tenant/router');
 
-passport.use('core-bearer', coreBearer);
+passport.use('bearer', bearer);
 
 const app = express();
 

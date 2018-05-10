@@ -1,5 +1,5 @@
 const { Strategy } = require('passport-http-bearer');
-const UserService = require('../services/user');
+const UserService = require('../../core/services/user');
 
 module.exports = new Strategy((token, next) => {
   UserService.retrieveSession(token).then(data => next(null, data)).catch(() => {
