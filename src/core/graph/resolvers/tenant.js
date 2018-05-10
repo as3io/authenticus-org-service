@@ -35,7 +35,9 @@ module.exports = {
     tenant: async (root, { input }, { auth }) => {
       auth.check();
       const { id } = input;
-      const record = await Tenant.findOne({ _id: id, owningUserId: auth.user.id });
+      const isTenantUser = await TenantUser.count({ userId: auth.user.id, tenantId: id });
+      if (!isTenantUser) throw new Error('You do not have permission to view this tenant.');
+      const record = await Tenant.findOne({ _id: id });
       if (!record) throw new Error(`No tenant record found for ID ${id}.`);
       return record;
     },
