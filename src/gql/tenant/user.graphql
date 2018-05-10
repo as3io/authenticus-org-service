@@ -1,0 +1,25 @@
+type Mutation {
+  createTenantUser(input: CreateTenantUserInput!): User!
+}
+
+type TenantUser {
+  id: String!
+  email: String!
+  givenName: String
+  familyName: String
+  photoURL: String
+  createdAt: Date
+  updatedAt: Date
+}
+
+input CreateTenantUserInput {
+  # captcha: String
+  payload: NewTenantUserPayloadInput
+}
+
+input NewTenantUserPayloadInput {
+  email: String!
+  password: String!
+  givenName: String!
+  familyName: String!
+}

@@ -58,11 +58,6 @@ module.exports = function userPlugin(schema) {
   schema.plugin(pushIdPlugin);
 
   /**
-   * Indexes
-   */
-  schema.index({ email: 1 }, { unique: true });
-
-  /**
    * Hooks.
    */
   schema.pre('save', function setPassword(next) {

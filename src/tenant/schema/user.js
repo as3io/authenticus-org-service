@@ -6,6 +6,8 @@ const schema = new Schema({}, {
   timestamps: true,
 });
 
+schema.index({ tenantId: 1, email: 1 }, { unique: true });
+
 schema.plugin(userPlugin);
 schema.plugin(tenantRelatablePlugin);
 

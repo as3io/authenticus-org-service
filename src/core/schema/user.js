@@ -14,6 +14,8 @@ const schema = new Schema({
   timestamps: true,
 });
 
+schema.index({ email: 1 }, { unique: true });
+
 schema.plugin(userPlugin);
 
 module.exports = schema;

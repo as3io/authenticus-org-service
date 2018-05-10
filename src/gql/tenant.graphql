@@ -2,3 +2,4 @@
 # import * from 'core/user.graphql'
 # import * from 'core/tenant.graphql'
 # import * from 'tenant/application.graphql'
+# import * from 'tenant/user.graphql'
