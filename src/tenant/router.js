@@ -5,6 +5,7 @@ const bodyParser = require('body-parser');
 const { graphqlExpress } = require('apollo-server-express');
 const schema = require('./graph/schema');
 const Tenant = require('../core/models/tenant');
+const authenticate = require('../common/middlewares/authenticate');
 
 const { assign } = Object;
 const handleAsync = fn => (req, res, next) => Promise.resolve(fn(req, res, next)).catch(next);
@@ -23,10 +24,11 @@ const loadTenant = handleAsync(async (req, res, next) => {
 router.use(
   noCache(),
   bodyParser.json(),
+  authenticate,
   loadTenant,
   graphqlExpress((req) => {
-    const { tenant } = req;
-    const context = { tenant };
+    const { tenant, auth } = req;
+    const context = { tenant, auth };
     return { schema, context };
   }),
 );
