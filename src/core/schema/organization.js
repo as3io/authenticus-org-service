@@ -1,7 +1,7 @@
 const { Schema } = require('mongoose');
 const User = require('../models/user');
-const pushIdPlugin = require('../plugins/push-id');
-const sluggablePlugin = require('../plugins/sluggable');
+const pushIdPlugin = require('../../common/plugins/push-id');
+const sluggablePlugin = require('../../common/plugins/sluggable');
 
 const userSettingsSchema = new Schema({
   pwdSaltRounds: {

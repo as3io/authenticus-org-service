@@ -1,6 +1,6 @@
 const { Schema } = require('mongoose');
-const userPlugin = require('../../plugins/user');
-const orgRelatablePlugin = require('../../plugins/org-relatable');
+const userPlugin = require('../../common/plugins/user');
+const orgRelatablePlugin = require('../../common/plugins/org-relatable');
 
 const schema = new Schema({}, {
   timestamps: true,

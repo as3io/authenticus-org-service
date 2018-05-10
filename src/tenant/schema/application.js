@@ -1,8 +1,8 @@
 const { Schema } = require('mongoose');
 const uuid = require('uuid/v4');
-const pushIdPlugin = require('../../plugins/push-id');
-const sluggablePlugin = require('../../plugins/sluggable');
-const orgRelatablePlugin = require('../../plugins/org-relatable');
+const pushIdPlugin = require('../../common/plugins/push-id');
+const sluggablePlugin = require('../../common/plugins/sluggable');
+const orgRelatablePlugin = require('../../common/plugins/org-relatable');
 
 const sessionSettingsSchema = new Schema({
   namespace: {

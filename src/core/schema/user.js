@@ -1,5 +1,5 @@
 const { Schema } = require('mongoose');
-const userPlugin = require('../plugins/user');
+const userPlugin = require('../../common/plugins/user');
 
 const schema = new Schema({
   logins: {

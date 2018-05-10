@@ -1,4 +1,4 @@
-const Organization = require('../models/organization');
+const Organization = require('../../core/models/organization');
 
 module.exports = function orgRelatablePlugin(schema) {
   schema.add({

@@ -1,7 +1,7 @@
 const { Schema } = require('mongoose');
-const sluggablePlugin = require('../../plugins/sluggable');
-const pushIdPlugin = require('../../plugins/push-id');
-const OrgApplication = require('../../models/org/application');
+const sluggablePlugin = require('../../common/plugins/sluggable');
+const pushIdPlugin = require('../../common/plugins/push-id');
+const Application = require('../models/application');
 
 const schema = new Schema({
   name: {
@@ -18,7 +18,7 @@ const schema = new Schema({
     required: true,
     validate: {
       async validator(v) {
-        const doc = await OrgApplication.findOne({ _id: v }, { _id: 1 });
+        const doc = await Application.findOne({ _id: v }, { _id: 1 });
         if (doc) return true;
         return false;
       },
