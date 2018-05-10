@@ -1,15 +1,7 @@
 const { Pagination, paginationResolvers } = require('@limit0/mongoose-graphql-pagination');
-const Tenant = require('../../../core/models/tenant');
 const Application = require('../../models/application');
 
 module.exports = {
-  /**
-   *
-   */
-  Application: {
-    tenant: app => Tenant.findOne({ _id: app.tenantId }),
-  },
-
   /**
    *
    */

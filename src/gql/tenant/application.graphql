@@ -12,7 +12,6 @@ type Application {
   name: String!
   slug: String!
   description: String
-  tenant: Tenant
   createdAt: Date
   updatedAt: Date
 }

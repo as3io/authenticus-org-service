@@ -1,3 +1,8 @@
+type Query {
+  allTenantUsers(pagination: PaginationInput = {}, sort: TenantUserSortInput = {}): TenantUserConnection!
+  tenantUser(input: ModelIdInput!): TenantUser!
+}
+
 type Mutation {
   createTenantUser(input: CreateTenantUserInput!): User!
 }
@@ -12,6 +17,22 @@ type TenantUser {
   updatedAt: Date
 }
 
+type TenantUserConnection {
+  totalCount: Int!
+  edges: [TenantUserEdge]!
+  pageInfo: PageInfo!
+}
+
+type TenantUserEdge {
+  node: TenantUser!
+  cursor: Cursor!
+}
+
+input TenantUserSortInput {
+  field: TenantUserSortField! = createdAt
+  order: Int! = -1
+}
+
 input CreateTenantUserInput {
   # captcha: String
   payload: NewTenantUserPayloadInput
@@ -22,4 +43,10 @@ input NewTenantUserPayloadInput {
   password: String!
   givenName: String!
   familyName: String!
+}
+
+enum TenantUserSortField {
+  name
+  createdAt
+  updatedAt
 }

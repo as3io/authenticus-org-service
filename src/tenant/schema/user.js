@@ -7,6 +7,11 @@ const schema = new Schema({}, {
 });
 
 schema.index({ tenantId: 1, email: 1 }, { unique: true });
+schema.index({ tenantId: 1, _id: 1 }, { unique: true });
+schema.index({ name: 1, _id: 1 }, { unique: true });
+schema.index({ name: -1, _id: -1 }, { unique: true });
+schema.index({ updatedAt: 1, _id: 1 }, { unique: true });
+schema.index({ updatedAt: -1, _id: -1 }, { unique: true });
 
 schema.plugin(userPlugin);
 schema.plugin(tenantRelatablePlugin);
