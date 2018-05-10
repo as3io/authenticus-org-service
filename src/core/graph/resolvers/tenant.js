@@ -43,9 +43,11 @@ module.exports = {
     /**
      *
      */
-    allTenants: (root, { pagination, sort }, { auth }) => {
+    allTenants: async (root, { pagination, sort }, { auth }) => {
       auth.check();
-      const criteria = { owningUserId: auth.user.id };
+      const tenantUsers = await TenantUser.find({ userId: auth.user.id }, { tenantId: 1 });
+      const tenantIds = tenantUsers.map(tenantUser => tenantUser.tenantId);
+      const criteria = { _id: { $in: tenantIds } };
       return new Pagination(Tenant, { pagination, sort, criteria });
     },
   },
