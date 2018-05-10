@@ -61,6 +61,11 @@ schema.plugin(tenantRelatablePlugin);
 schema.plugin(pushIdPlugin);
 schema.plugin(sluggablePlugin, { createFrom: 'name' });
 
+schema.index({ tenantId: 1, _id: 1 }, { unique: true });
 schema.index({ tenantId: 1, slug: 1 }, { unique: true });
+schema.index({ name: 1, _id: 1 }, { unique: true });
+schema.index({ name: -1, _id: -1 }, { unique: true });
+schema.index({ updatedAt: 1, _id: 1 }, { unique: true });
+schema.index({ updatedAt: -1, _id: -1 }, { unique: true });
 
 module.exports = schema;

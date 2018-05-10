@@ -1,3 +1,8 @@
+type Query {
+  allApplications(pagination: PaginationInput = {}, sort: ApplicationSortInput = {}): ApplicationConnection!
+  application(input: ModelIdInput!): Application!
+}
+
 type Mutation {
   createApplication(input: CreateApplicationInput!): Application!
 }
@@ -12,6 +17,22 @@ type Application {
   updatedAt: Date
 }
 
+type ApplicationConnection {
+  totalCount: Int!
+  edges: [ApplicationEdge]!
+  pageInfo: PageInfo!
+}
+
+type ApplicationEdge {
+  node: Application!
+  cursor: Cursor!
+}
+
+input ApplicationSortInput {
+  field: ApplicationSortField! = createdAt
+  order: Int! = -1
+}
+
 input CreateApplicationInput {
   payload: ApplicationPayloadInput!
 }
@@ -19,4 +40,10 @@ input CreateApplicationInput {
 input ApplicationPayloadInput {
   name: String!
   description: String
+}
+
+enum ApplicationSortField {
+  name
+  createdAt
+  updatedAt
 }
