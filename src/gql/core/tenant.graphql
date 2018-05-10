@@ -12,9 +12,15 @@ type Tenant {
   name: String!
   slug: String!
   description: String
-  owner: User
+  users: [TenantUser]
   createdAt: Date
   updatedAt: Date
+}
+
+type TenantUser {
+  id: String!
+  role: TenantUserRole!
+  user: User!
 }
 
 type TenantConnection {
@@ -46,4 +52,9 @@ enum TenantSortField {
   name
   createdAt
   updatedAt
+}
+
+enum TenantUserRole {
+  Owner
+  Member
 }

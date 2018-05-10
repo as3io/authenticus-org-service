@@ -1,5 +1,6 @@
 const { Pagination, paginationResolvers } = require('@limit0/mongoose-graphql-pagination');
 const Tenant = require('../../models/tenant');
+const TenantUser = require('../../models/tenant-user');
 const User = require('../../models/user');
 
 module.exports = {
@@ -7,7 +8,11 @@ module.exports = {
    *
    */
   Tenant: {
-    owner: tenant => User.findOne({ _id: tenant.owningUserId }),
+    users: tenant => TenantUser.find({ tenantId: tenant.id }),
+  },
+
+  TenantUser: {
+    user: tenantUser => User.findOne({ _id: tenantUser.userId }),
   },
 
   /**
@@ -52,12 +57,16 @@ module.exports = {
     /**
      *
      */
-    createTenant: (root, { input }, { auth }) => {
+    createTenant: async (root, { input }, { auth }) => {
       auth.check();
       const { payload } = input;
-      payload.owningUserId = auth.user.id;
-      const doc = new Tenant(payload);
-      return doc.save();
+      const tenant = await Tenant.create(payload);
+      await TenantUser.create({
+        userId: auth.user.id,
+        tenantId: tenant.id,
+        role: 'Owner',
+      });
+      return tenant;
     },
   },
 };
