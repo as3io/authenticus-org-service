@@ -1,5 +1,9 @@
 const Promise = require('bluebird');
 const { Router } = require('express');
+const { noCache } = require('helmet');
+const bodyParser = require('body-parser');
+const { graphqlExpress } = require('apollo-server-express');
+const schema = require('./graph/schema');
 const Tenant = require('../core/models/tenant');
 
 const { assign } = Object;
@@ -16,8 +20,15 @@ const loadTenant = handleAsync(async (req, res, next) => {
   next();
 });
 
-router.get('/', loadTenant, (req, res) => {
-  res.send(req.tenant);
-});
+router.use(
+  noCache(),
+  bodyParser.json(),
+  loadTenant,
+  graphqlExpress((req) => {
+    const { tenant } = req;
+    const context = { tenant };
+    return { schema, context };
+  }),
+);
 
 module.exports = router;
