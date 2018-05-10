@@ -5,6 +5,7 @@ const bodyParser = require('body-parser');
 const { graphqlExpress } = require('apollo-server-express');
 const schema = require('./graph/schema');
 const Tenant = require('../core/models/tenant');
+const TenantAuth = require('../common/context/tenant-auth');
 const authenticate = require('../common/middlewares/authenticate');
 
 const { assign } = Object;
@@ -28,7 +29,8 @@ router.use(
   loadTenant,
   graphqlExpress((req) => {
     const { tenant, auth } = req;
-    const context = { tenant, auth };
+    const tenantAuth = TenantAuth({ tenant, auth });
+    const context = { tenantAuth };
     return { schema, context };
   }),
 );
