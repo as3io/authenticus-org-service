@@ -1,12 +1,12 @@
 const { Schema } = require('mongoose');
 const userPlugin = require('../../common/plugins/user');
-const orgRelatablePlugin = require('../../common/plugins/org-relatable');
+const tenantRelatablePlugin = require('../../common/plugins/tenant-relatable');
 
 const schema = new Schema({}, {
   timestamps: true,
 });
 
 schema.plugin(userPlugin);
-schema.plugin(orgRelatablePlugin);
+schema.plugin(tenantRelatablePlugin);
 
 module.exports = schema;

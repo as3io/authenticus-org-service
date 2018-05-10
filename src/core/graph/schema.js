@@ -1,9 +1,9 @@
-const { join } = require('path');
+const { resolve } = require('path');
 const { makeExecutableSchema } = require('graphql-tools');
 const { importSchema } = require('graphql-import');
 const resolvers = require('./resolvers');
 
-const typeDefs = importSchema(join(__dirname, 'definitions/index.graphql'));
+const typeDefs = importSchema(resolve(__dirname, '../../gql/core.graphql'));
 
 module.exports = makeExecutableSchema({
   typeDefs,

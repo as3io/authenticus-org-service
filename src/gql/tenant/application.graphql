@@ -1,0 +1,22 @@
+type Mutation {
+  createApplication(input: CreateApplicationInput!): Application!
+}
+
+type Application {
+  id: String!
+  name: String!
+  slug: String!
+  description: String
+  tenant: Tenant
+  createdAt: Date
+  updatedAt: Date
+}
+
+input CreateApplicationInput {
+  payload: ApplicationPayloadInput!
+}
+
+input ApplicationPayloadInput {
+  name: String!
+  description: String
+}

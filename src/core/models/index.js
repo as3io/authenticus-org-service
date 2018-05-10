@@ -1,7 +1,7 @@
-const Organization = require('./organization');
+const Tenant = require('./tenant');
 const User = require('./user');
 
 module.exports = {
-  Organization,
+  Tenant,
   User,
 };

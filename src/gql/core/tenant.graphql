@@ -1,0 +1,49 @@
+type Query {
+  allTenants(pagination: PaginationInput = {}, sort: TenantSortInput = {}): TenantConnection!
+  tenant(input: ModelIdInput!): Tenant!
+}
+
+type Mutation {
+  createTenant(input: CreateTenantInput!): Tenant!
+}
+
+type Tenant {
+  id: String!
+  name: String!
+  slug: String!
+  description: String
+  owner: User
+  createdAt: Date
+  updatedAt: Date
+}
+
+type TenantConnection {
+  totalCount: Int!
+  edges: [TenantEdge]!
+  pageInfo: PageInfo!
+}
+
+type TenantEdge {
+  node: Tenant!
+  cursor: Cursor!
+}
+
+input TenantSortInput {
+  field: TenantSortField! = createdAt
+  order: Int! = -1
+}
+
+input CreateTenantInput {
+  payload: TenantPayloadInput!
+}
+
+input TenantPayloadInput {
+  name: String!
+  description: String
+}
+
+enum TenantSortField {
+  name
+  createdAt
+  updatedAt
+}

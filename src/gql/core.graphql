@@ -1,0 +1,3 @@
+# import * from 'common.graphql'
+# import * from 'core/user.graphql'
+# import * from 'core/tenant.graphql'

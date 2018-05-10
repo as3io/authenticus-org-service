@@ -2,7 +2,7 @@ const { Schema } = require('mongoose');
 const uuid = require('uuid/v4');
 const pushIdPlugin = require('../../common/plugins/push-id');
 const sluggablePlugin = require('../../common/plugins/sluggable');
-const orgRelatablePlugin = require('../../common/plugins/org-relatable');
+const tenantRelatablePlugin = require('../../common/plugins/tenant-relatable');
 
 const sessionSettingsSchema = new Schema({
   namespace: {
@@ -57,7 +57,7 @@ const schema = new Schema({
   timestamps: true,
 });
 
-schema.plugin(orgRelatablePlugin);
+schema.plugin(tenantRelatablePlugin);
 schema.plugin(pushIdPlugin);
 schema.plugin(sluggablePlugin, { createFrom: 'name' });
 
